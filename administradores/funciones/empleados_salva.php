@@ -23,7 +23,7 @@
     $len = count($arreglo);
     $pos = $len-1;
     $ext = $arreglo[$pos];
-    $dir = "/Applications/XAMPP/xamppfiles/htdocs/proyecto/administradores/fotos/";
+    $dir = "../fotos/";
 
     if($file_name != ''){
         $file_enc = md5_file($file_tmp);

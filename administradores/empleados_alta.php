@@ -8,67 +8,67 @@
     <script src="js/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="style/menu.css">
     <script>
-        function recibe() {
-            var nombre = $('#nombre').val();
-            var apellidos = $('#apellido').val();
-            var correo = $('#correo').val();
-            var pasw = $('#pasw').val();
-            var rol = $('#rol').val();
+    var confirm = 1;
 
-            console.log("Validando campos...");
-            console.log("Nombre:", nombre);
-            console.log("Apellidos:", apellidos);
-            console.log("Correo:", correo);
-            console.log("Contraseña:", pasw);
-            console.log("Rol:", rol);
+    function recibe() {
+        var nombre = $('#nombre').val();
+        var apellidos = $('#apellido').val();
+        var correo = $('#correo').val();
+        var pasw = $('#pasw').val();
+        var rol = $('#rol').val();
+        
+        console.log("Validando campos...");
+        console.log("Nombre:", nombre);
+        console.log("Apellidos:", apellidos);
+        console.log("Correo:", correo);
+        console.log("Contraseña:", pasw);
+        console.log("Rol:", rol);
 
-            $('#mensaje').show();
-            if (nombre === "" || apellidos === "" || correo === "" || pasw === "" || rol === "0" || archivo === "") {
-                console.log("Faltan campos");
-                $('#mensaje').html('Faltan Campos Por Llenar');
-                setTimeout(function () {
-                    $('#mensaje').html('');
-                    $('#mensaje').hide();
-                }, 5000);
-            } else {
-                console.log("Enviando formulario");
-                document.getElementById('form01').submit();
-            }
+        $('#mensaje').show();
+        if ((nombre === "" || apellidos === "" || correo === "" || pasw === "" || rol === "0" || archivo === "") && confirm === 1) {
+            console.log("Faltan campos");
+            mostrarMensaje('#mensaje', 'Faltan Campos Por Llenar');
+        } else {
+            console.log("Enviando formulario");
+            document.getElementById('form01').submit();
         }
+    }
 
-        function correoAjax() {
-            var correoA = $('#correo').val();
+    function correoAjax() {
+        var correoA = $('#correo').val();
 
-            $.ajax({
-                url: 'funciones/correoAjax.php',
-                type: 'post',
-                dataType: 'text',
-                data: 'correo=' + correoA,
-                success: function (res) {
-                    console.log(res);
-                    $('#mensajeCorreo').show();
-                    if (res == 1) {
-                        $('#mensajeCorreo').html('Correo ' + correoA + ' Ya Registrado ');
-                        setTimeout(function () {
-                            $('#mensajeCorreo').html('');
-                            $('#mensajeCorreo').hide();
-                        }, 5000);
-                        $('#correo').val('');
-                    } else {
-                        $('#mensajeCorreo').hide();
-                    }
-                },
-                error: function (res) {
-                    console.log("Error en el sistema");
-                    $('#mensajeCorreo').html('Error en el sistema');
-                    setTimeout(function () {
-                        $('#mensajeCorreo').html('');
-                        $('#mensajeCorreo').hide();
-                    }, 5000);
+        $.ajax({
+            url: 'funciones/correoAjax.php',
+            type: 'post',
+            dataType: 'text',
+            data: { correo: correoA },
+            success: function (res) {
+                console.log(res);
+                $('#mensajeCorreo').show();
+                if (res === "1") {
+                    confirm = 1;
+                    mostrarMensaje('#mensajeCorreo', 'Correo ' + correoA + ' Ya Registrado ');
+                    $('#correo').val('');
+                } else {
+                    $('#mensajeCorreo').hide();
+                    confirm = 0;
                 }
-            });
-        }
-    </script>
+            },
+            error: function () {
+                console.log("Error en el sistema");
+                mostrarMensaje('#mensajeCorreo', 'Error en el sistema');
+            }
+        });
+    }
+
+    function mostrarMensaje(elemento, mensaje) {
+        $(elemento).html(mensaje).show();
+        setTimeout(function () {
+            $(elemento).html('').hide();
+        }, 5000);
+    }
+</script>
+
 </head>
 
 <body>
