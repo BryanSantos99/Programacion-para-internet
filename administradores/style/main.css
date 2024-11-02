@@ -24,11 +24,7 @@ body {
   display: flex;
   justify-content: flex-end;
   list-style: none;
-<<<<<<< HEAD
   width: 65%;
-=======
-  width: 45%;
->>>>>>> mejoras
   height: 5vh;
   text-align: center;
   padding-left: 1rem;
