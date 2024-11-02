@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
+    <?php
+    session_start();
+    if (isset($_SESSION['correo'])) {
+        header('Location: bienvenido.php');
+        exit();
+    }
+    ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrador</title>
