@@ -24,7 +24,7 @@ body {
   display: flex;
   justify-content: flex-end;
   list-style: none;
-  width: 45%;
+  width: 65%;
   height: 5vh;
   text-align: center;
   padding-left: 1rem;
@@ -49,8 +49,8 @@ body {
   height: 5vh;
   text-align: center;
   color: white;
-  padding: 1rem;
-  margin-left: 4rem;
+  padding: .5rem;
+  margin-right: 12rem;
 }
 #menu-lista a:hover {
   background-color: white;

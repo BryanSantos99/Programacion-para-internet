@@ -23,9 +23,14 @@
     $len = count($arreglo);
     $pos = $len-1;
     $ext = $arreglo[$pos];
-    $dir = "../fotos/";
+    $dir = "/Applications/XAMPP/htdocs/Programacion-para-internet/administradores/fotos";
 
-    if($file_name != ''){
+    
+    if (!is_writable($dir)) {
+        die("Error: No se tienen permisos para escribir en el directorio $dir");
+    }
+
+    if (file_exists($file_tmp)) {
         $file_enc = md5_file($file_tmp);
         $fileName1 = "$file_enc.$ext";
     
@@ -34,16 +39,18 @@
         $archivo_n = $file_name;
         $archivo = $fileName1;
       }
+    } else {
+        die("Error: El archivo temporal no existe.");
     }
+
     $sql = "INSERT INTO empleados (nombre, apellidos, correo, pass, rol, archivo_n, archivo)
             VALUES('$nombre', '$apellidos', '$correo', '$pass_enc', $rol, '$archivo_n', '$archivo')";
 
     $res = $con->query($sql);
 
-    mysqli_close($con);
-    
 
-    header("location:../empleados_lista.php"); 
-    mysqli_close($con);
 
+    mysqli_close($con);
+  
+    header("Location: ../empleados_lista.php");
 ?>

@@ -101,6 +101,8 @@
        
             <li class="menu-item"><a href="empleados_lista.php">Empleados</a></li>
             <li class="menu-item"><a href="#">Productos</a></li>
+            <li class="menu-item"><a href="#">Promociones</a></li>
+            <li class="menu-item"><a href="#">Pedidos</a></li>
             <li class="menu-item"><a href="funciones/logout.php">Cerrar sesión</a></li>
         </ul>
     </nav>
