@@ -11,7 +11,7 @@ $correo = $_REQUEST['correo'];
 $pass = $_REQUEST['pass'];
 $pass_enc = md5($pass);
 
-$sql = "SELECT * FROM empleados WHERE correo = '$correo' AND pass='$pass_enc'";
+$sql = "SELECT * FROM empleados WHERE correo = '$correo' AND pass='$pass_enc' AND eliminado= 0 ";
 $res = $con->query($sql);
 $num = $res->num_rows;
 

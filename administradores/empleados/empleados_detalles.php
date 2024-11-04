@@ -41,7 +41,7 @@
             <li class="menu-item"><a href="#">Productos</a></li>
             <li class="menu-item"><a href="#">Promociones</a></li>
             <li class="menu-item"><a href="#">Pedidos</a></li>
-            <li class="menu-item"><a href="funciones/logout.php">Cerrar sesión</a></li>
+            <li class="menu-item"><a href="funciones/salir.php">Cerrar sesión</a></li>
         </ul>
     </nav>
     
@@ -51,10 +51,10 @@
             <p class="registros"><strong>Nombre:</strong> <?php echo $nombre; ?> <?php echo $apellidos; ?></p>
             <p class="registros"><strong>Correo:</strong> <?php echo $correo; ?></p>
             <p class="registros"><strong>Rol:</strong> <?php echo $rol; ?></p>
-            <p class="registros"><strong>Foto:</strong> <img src="fotos/<?php echo $archivo_n; ?>" alt="Foto del Empleado"></p>
+            <p class="registros"><strong>Foto:</strong> <img src="../fotos/<?php echo $archivo_n; ?>" alt="Foto del Empleado"></p>
         </div>
         <a href="empleados_lista.php">Volver a la lista</a>
-        <a id="botonInicio" href="bienvenido.php">Volver al inicio</a>
+        <a id="botonInicio" href="../bienvenido.php">Volver al inicio</a>
     </div>
 </body>
 </html>

@@ -2,6 +2,7 @@
 <html lang="es">
 <?php
 
+
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
@@ -103,7 +104,7 @@
             <li class="menu-item"><a href="#">Productos</a></li>
             <li class="menu-item"><a href="#">Promociones</a></li>
             <li class="menu-item"><a href="#">Pedidos</a></li>
-            <li class="menu-item"><a href="funciones/logout.php">Cerrar sesión</a></li>
+            <li class="menu-item"><a href="funciones/salir.php">Cerrar sesión</a></li>
         </ul>
     </nav>
     
@@ -128,7 +129,7 @@
 
                 <label for="archivo">Archivo actual:</label><br>
             
-                <img src="fotos/<?php echo $archivo; ?>" alt="Imagen actual" style="max-width: 200px;"><br>
+                <img src="../fotos/<?php echo $archivo; ?>" alt="Imagen actual" style="max-width: 200px;"><br>
         
                 
                 <label for="archivo">Cambiar archivo:</label><br>
@@ -146,7 +147,7 @@
             </form>
         </div>
         <button id="regresarBoton" onClick="window.location.href='empleados_lista.php'">Regresar</button>
-        <a id="botonInicio" href="bienvenido.php">Volver al inicio</a>
+        <a id="botonInicio" href="../bienvenido.php">Volver al inicio</a>
     </div>
 </body>
 

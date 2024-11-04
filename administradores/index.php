@@ -4,14 +4,14 @@
     <?php
     session_start();
     if (isset($_SESSION['correo'])) {
-        header('Location: bienvenido.php');
+        header('Location: empleados/bienvenido.php');
         exit();
     }
     ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrador</title>
-    <link rel="stylesheet" href="style/inde.css">
+    <link rel="stylesheet" href="empleados/style/inde.css">
     <script src="js/jquery-3.7.1.min.js"></script>
     <script>
       function mensaje() {
@@ -25,7 +25,7 @@
                 }, 5000);;
         } else {
           $.ajax({
-            url: 'funciones/validaEmpleado.php',
+            url: 'empleados/funciones/validaEmpleado.php',
             type: 'post',
             dataType: 'text',
             data: { correo: correo, pass: pass },
