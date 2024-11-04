@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrador</title>
     <link rel="stylesheet" href="empleados/style/inde.css">
-    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="empleados/js/jquery-3.7.1.min.js"></script>
     <script>
       function mensaje() {
         var correo = document.forma01.correo.value;

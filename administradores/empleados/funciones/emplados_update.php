@@ -26,7 +26,7 @@
         $arreglo = explode(".", $file_name);
         $len = count($arreglo);
         $ext = $arreglo[$len-1];
-        $dir = "C:\xampp\htdocs\proyecto\administradores\fotos";
+        $dir = "/Applications/XAMPP/xamppfiles/htdocs/Programacion-para-internet/administradores/fotos";
         
         $nuevo_nombre = md5_file($file_tmp) . "." . $ext;
         $ruta_destino = $dir . $nuevo_nombre;
