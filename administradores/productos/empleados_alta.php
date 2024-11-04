@@ -83,7 +83,7 @@
                 <li class="menu-item"><a href="#">Productos</a></li>
                 <li class="menu-item"><a href="#">Promociones</a></li>
                 <li class="menu-item"><a href="#">Pedidos</a></li>
-                <li class="menu-item"><a href="funciones/logout.php">Cerrar sesión</a></li>
+                <li class="menu-item"><a href="funciones/salir.php">Cerrar sesión</a></li>
             </ul>
         </nav>
     <div id="contenedorPrincipal">
