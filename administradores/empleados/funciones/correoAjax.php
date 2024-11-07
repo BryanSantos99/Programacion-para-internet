@@ -18,8 +18,4 @@
         echo "$ban";
     }
     mysqli_close($con);
-
-
-
-
 ?>
