@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['correo'])) {
-    header('Location: empleados/index.php');
+    header('Location:index.php');
     exit();
 }
 ?>

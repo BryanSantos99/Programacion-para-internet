@@ -4,7 +4,7 @@
     <?php
     session_start();
     if (isset($_SESSION['correo'])) {
-        header('Location: empleados/bienvenido.php');
+        header('Location:bienvenido.php');
         exit();
     }
     ?>

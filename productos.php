@@ -11,7 +11,7 @@
     ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/index.css">
+    <link rel="stylesheet" href="style/productos.css">
     <link rel="stylesheet" href="style/nav.css">
     <link rel="stylesheet" href="style/footer.css">
     <title>Document</title>
@@ -20,8 +20,8 @@
     <nav>
         <h1 id="logo">logo</h1>
         <ul>
-            <a href="#">Home</a>
-            <a href="productos.php">Productos</a>
+            <a href="index.php">Home</a>
+            <a href="#">Productos</a>
             <a href="#">Contacto</a>
             <a href="#">Carrito</a>
             <?php
@@ -34,20 +34,12 @@
         </ul>
     </nav>
     <main>
-        <div id="promocion">
-            <?php
-                $sql = "SELECT * FROM promociones ORDER BY RAND() LIMIT 1";
-                $res = $con->query($sql);
-                if ($res && $res->num_rows > 0) {
-                    $row = $res->fetch_assoc();
-                    $img = $row['archivo'];
-                    echo '<img src="promocionesf/' . $img . '" alt="Promoción">';
-                }
-            ?>
+        <div id="titulo">
+           <h1>Productos</h1>
         </div>
         <div id="productos">
             <?php
-            for ($i = 1; $i <= 6; $i++){
+            for ($i = 1; $i <= 53; $i++){
                 $sql = "SELECT * FROM productos LIMIT 6";
                 $res = $con->query($sql);
                 $row = $res->fetch_assoc();

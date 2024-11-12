@@ -18,24 +18,31 @@ main{
     height: auto;
     min-height: 50rem;
     justify-content: center;
+    display: flexbox;
+    align-items: center;
+    justify-content: center;
     
 }
-#promocion{
-    margin-top: 1.5rem;
-    width: 100%;
-    height: auto;
-    min-height: 10rem;
+#titulo{
+    font-size: 45px;
+    margin: 1.5rem auto;
+    color: #ddd;
+    width: 35%;
+    height: 10%;
+    min-height: 6rem;
     background-color: gray;
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
+    border-radius: 20px;
 }
 
 
 #productos {
     display: grid;
     height: auto;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
     max-width: 1200px;
     width: 100%;
@@ -49,8 +56,7 @@ main{
     border-radius: 20px;
     padding: 20px;
     text-align: center;
-    margin: 2rem;
-    
+    margin: 2rem;;
 }
 
 .producto img {
