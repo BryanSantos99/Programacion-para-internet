@@ -1,11 +1,11 @@
-footer{
-    width: 100%;
-    background-color: #333;
-    color: #fff;
-    
-    text-align: center;
-    height: 4rem;
+footer {
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+
+  text-align: center;
+  height: 4rem;
 }
-#derechos{
-    padding-top: .9rem;
+#derechos {
+  padding-top: 0.9rem;
 }

@@ -22,7 +22,7 @@
         <ul>
             <a href="index.php">Home</a>
             <a href="#">Productos</a>
-            <a href="#">Contacto</a>
+            <a href="contacto.php">Contacto</a>
             <a href="#">Carrito</a>
             <?php
             if (!isset($_SESSION['correo'])) {
@@ -37,9 +37,10 @@
         <div id="titulo">
            <h1>Productos</h1>
         </div>
+        <div id="produ">
         <div id="productos">
             <?php
-            for ($i = 1; $i <= 53; $i++){
+            for ($i = 1; $i <= 100; $i++){
                 $sql = "SELECT * FROM productos LIMIT 6";
                 $res = $con->query($sql);
                 $row = $res->fetch_assoc();
@@ -49,7 +50,7 @@
                     $cod = $row['codigo'];
                     $pre = $row['costo'];
                     echo '<div class="producto" id="producto-'.$id.'"><br>';
-                    echo '<img id="imgp'.$id.'" src="productosf/'.$img.'"><br>';
+                    echo '<a class ="imgproducto" href="google.com"><img id="imgp'.$id.'" src="productosf/'.$img.'"></a><br>';
                     echo '<a href="#">'.$name.'</a><br>';
                     echo '<p>Codigo: '.$cod.'</p>';
                     echo '<p>$'.$pre.'</p>';
@@ -59,6 +60,7 @@
                     echo '</div>';
                 }
             ?>
+        </div>
         </div>
     </main>
     <footer>

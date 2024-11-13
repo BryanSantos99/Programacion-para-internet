@@ -22,7 +22,7 @@
         <ul>
             <a href="#">Home</a>
             <a href="productos.php">Productos</a>
-            <a href="#">Contacto</a>
+            <a href="contacto.php">Contacto</a>
             <a href="#">Carrito</a>
             <?php
             if (!isset($_SESSION['correo'])) {
@@ -36,7 +36,7 @@
     <main>
         <div id="promocion">
             <?php
-                $sql = "SELECT * FROM promociones ORDER BY RAND() LIMIT 1";
+                $sql = "SELECT * FROM promociones";
                 $res = $con->query($sql);
                 if ($res && $res->num_rows > 0) {
                     $row = $res->fetch_assoc();
@@ -45,7 +45,8 @@
                 }
             ?>
         </div>
-        <div id="productos">
+        <div id="produ">
+            <div id="productos">
             <?php
             for ($i = 1; $i <= 6; $i++){
                 $sql = "SELECT * FROM productos LIMIT 6";
@@ -57,7 +58,7 @@
                     $cod = $row['codigo'];
                     $pre = $row['costo'];
                     echo '<div class="producto" id="producto-'.$id.'"><br>';
-                    echo '<img id="imgp'.$id.'" src="productosf/'.$img.'"><br>';
+                    echo '<a class ="imgproducto" href="https://www.google.com/"><img id="imgp'.$id.'" src="productosf/'.$img.'"></a><br>';
                     echo '<a href="#">'.$name.'</a><br>';
                     echo '<p>Codigo: '.$cod.'</p>';
                     echo '<p>$'.$pre.'</p>';
@@ -67,6 +68,7 @@
                     echo '</div>';
                 }
             ?>
+            </div>
         </div>
     </main>
     <footer>
