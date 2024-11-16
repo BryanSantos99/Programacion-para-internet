@@ -2,19 +2,42 @@
 <html lang="en">
 <head>
     <?php
+        session_start();
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
         require "funciones/conecta.php";
         $con = conecta();
-        session_start();
+        $id_cliente=$_SESSION['id_usuario'];
     ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/index.css">
     <link rel="stylesheet" href="style/nav.css">
     <link rel="stylesheet" href="style/footer.css">
+    <script src="js/jquery-3.7.1.min.js"></script>
     <title>Document</title>
+    <script>
+        function agregarCarrito(id_producto){
+            console.log(id_producto,"puto");
+            $.ajax({
+            url: 'funciones/carritoAjax.php',
+            type: 'post',
+            dataType: 'text',
+            data: {id_producto:id_producto},
+            success: function(res) {
+              console.log(res);
+            },
+            error: function() {
+              console.log("error");
+              $('#mensaje').html('Error archivo no encontrado').show();
+              setTimeout(function() {
+                $('#mensaje').html('').hide();
+              }, 5000);
+            }
+          });
+        }
+    </script>
 </head>
 <body>
     <nav>
@@ -26,9 +49,9 @@
             <a href="#">Carrito</a>
             <?php
             if (!isset($_SESSION['correo'])) {
-                echo '<a href="#">Iniciar Sesión</a>';
+                echo '<a href="login.php">Iniciar Sesión</a>';
             } else {
-                echo '<a href="logout.php">Cerrar Sesión</a>';
+                echo '<a href="funciones/salir.php">Cerrar Sesión</a>';
             }
             ?>
         </ul>
@@ -52,18 +75,18 @@
                 $sql = "SELECT * FROM productos LIMIT 6";
                 $res = $con->query($sql);
                 $row = $res->fetch_assoc();
-                    $id = $row['id'];
+                    $id_producto = $row['id'];
                     $img = $row['archivo_n'];
                     $name = $row['nombre'];
                     $cod = $row['codigo'];
                     $pre = $row['costo'];
-                    echo '<div class="producto" id="producto-'.$id.'"><br>';
-                    echo '<a class ="imgproducto" href="https://www.google.com/"><img id="imgp'.$id.'" src="productosf/'.$img.'"></a><br>';
+                    echo '<div class="producto" id="producto-'.$id_producto.'"><br>';
+                    echo '<a class ="imgproducto" href="https://www.google.com/"><img id="imgp'.$id_producto.'" src="productosf/'.$img.'"></a><br>';
                     echo '<a href="#">'.$name.'</a><br>';
                     echo '<p>Codigo: '.$cod.'</p>';
                     echo '<p>$'.$pre.'</p>';
                     if (isset($_SESSION['correo'])) {
-                        echo '<button>Agregar al carrito</button>';
+                        echo '<button onclick="agregarCarrito('.$id_producto.')">Agregar al carrito</button>';
                     }
                     echo '</div>';
                 }
