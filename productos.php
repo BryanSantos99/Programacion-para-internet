@@ -9,11 +9,46 @@
         $con = conecta();
         session_start();
     ?>
+    <?php
+        
+        $sql = "SELECT * FROM pedidos WHERE estado = 0";
+        $res = $con->query($sql);
+        $pedido = $res->fetch_array();
+        $id_pedido=$pedido["id"];
+        
+        $sql2 = "SELECT * FROM pedidos_productos WHERE id_pedido = '$id_pedido'";
+        $res2 = $con->query($sql2);
+        $pedido_producto = $res2->fetch_array();
+        $cantidad_productos = $res2->num_rows;
+
+    ?> 
+     <script>
+        function agregarCarrito(id_producto){
+            console.log(id_producto,"puto");
+            $.ajax({
+            url: 'funciones/carritoAjax.php',
+            type: 'post',
+            dataType: 'text',
+            data: {id_producto:id_producto},
+            success: function(res) {
+              console.log(res);
+            },
+            error: function() {
+              console.log("error");
+              $('#mensaje').html('Error archivo no encontrado').show();
+              setTimeout(function() {
+                $('#mensaje').html('').hide();
+              }, 5000);
+            }
+          });
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/productos.css">
     <link rel="stylesheet" href="style/nav.css">
     <link rel="stylesheet" href="style/footer.css">
+    <script src="js/jquery-3.7.1.min.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -21,14 +56,21 @@
         <h1 id="logo">logo</h1>
         <ul>
             <a href="index.php">Home</a>
-            <a href="#">Productos</a>
+            <a href="productos.php">Productos</a>
             <a href="contacto.php">Contacto</a>
-            <a href="#">Carrito</a>
             <?php
             if (!isset($_SESSION['correo'])) {
-                echo '<a href="#">Iniciar Sesión</a>';
+                echo '<a href="carrito.php">Carrito</a>';
+            }else{
+                echo '<a href="carrito.php">Carrito ('.$cantidad_productos .')</a>';
+            }
+            ?>
+            
+            <?php
+            if (!isset($_SESSION['correo'])) {
+                echo '<a href="login.php">Iniciar Sesión</a>';
             } else {
-                echo '<a href="logout.php">Cerrar Sesión</a>';
+                echo '<a href="funciones/salir.php">Cerrar Sesión</a>';
             }
             ?>
         </ul>
@@ -55,7 +97,7 @@
                     echo '<p>Codigo: '.$cod.'</p>';
                     echo '<p>$'.$pre.'</p>';
                     if (isset($_SESSION['correo'])) {
-                        echo '<button>Agregar al carrito</button>';
+                        echo '<button onclick="agregarCarrito('.$id.')">Agregar al carrito</button>';
                     }
                     echo '</div>';
                 }

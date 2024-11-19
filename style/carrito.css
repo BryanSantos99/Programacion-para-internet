@@ -1,0 +1,120 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #f9f9f9;
+  }
+  main {
+    height: auto;
+    min-height: 50rem;
+    justify-content: center;
+  }
+  .container{
+    padding: 20px;
+  }
+  .container h1{
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+  }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #0078D7;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e9ecef;
+}
+
+input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.btn-re {
+    background-color: #ffc107;
+    color: #fff;
+}
+
+.btn-re:hover {
+    background-color: #e0a800;
+}
+
+.btn-com {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.btn-com:hover {
+    background-color: #218838;
+}
+
+.btn-eli {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.btn-el:hover {
+    background-color: #b02a37;
+}
+
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    th, td {
+        font-size: 14px;
+    }
+}
