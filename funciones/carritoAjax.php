@@ -32,6 +32,33 @@
 
         $sql4 = "INSERT INTO pedidos_productos (id_pedido, id_producto, cantidad, precio) VALUES ('$id_pedido', '$id_producto', '1', '$precio_producto')";
         $res4 = $con->query($sql4);
+    }else{
+        $pedido=$res->fetch_array();
+        $id_pedido=$pedido['id'];
+        
+        $sql = "SELECT * FROM pedidos_productos WHERE id_producto = $id_producto";
+        $res = $con->query($sql);
+        $num_producto = $res->num_rows;
+        if($num_producto<1){
+            $sql2 = "SELECT * FROM pedidos WHERE id_cliente = '$id_cliente' AND estado = '0' ";
+            $res2 = $con->query($sql2);
+
+            $pedido = $res2->fetch_array();
+            $id_pedido=$pedido['id'];
+
+            $sql3 = "SELECT * FROM productos WHERE id = '$id_producto' AND eliminado = '0'";
+            $res3 = $con->query($sql3);
+
+            $producto = $res3->fetch_array();
+            $precio_producto = $producto['costo'];
+
+            $sql4 = "INSERT INTO pedidos_productos (id_pedido, id_producto, cantidad, precio) VALUES ('$id_pedido', '$id_producto', '1', '$precio_producto')";
+            $res4 = $con->query($sql4);
+        }else{
+            $sql5="UPDATE pedidos_productos SET cantidad = cantidad + 1 WHERE id_producto=$id_producto";
+            $res5 = $con->query($sql5);
+        }
     }
-    echo " no puedo promgramar ";
+    
+    mysqli_close($con);
 ?>
