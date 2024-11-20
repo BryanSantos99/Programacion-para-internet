@@ -33,8 +33,6 @@
                 data: { id_producto: id_producto, cantidad: cantidad },
                 success: function(res) {
                     console.log(res);
-                    
-                    
                 },
                 error: function() {
                     console.log("error");
@@ -45,6 +43,36 @@
                 }
             });
         }
+        function consultar_carrito(id){
+            
+            $.ajax({
+            url: 'funciones/updatecarrito.php',
+            data:{id:id},
+            type: 'POST',
+            dataType: 'text',
+            success: function(data) {
+                console.log(data);
+            document.getElementById("subtotal").innerHTML = data;
+            }
+
+            });
+
+        }
+        function consultar_subtotal(id){
+            $.ajax({
+            url: 'funciones/updatTotal.php',
+            data:{id:id},
+            type: 'POST',
+            dataType: 'text',
+            success: function(data) {
+            document.getElementById("total").innerHTML = data;
+            }
+
+            });
+
+        }
+
+
     </script>
 </head>
 <body>
@@ -113,7 +141,7 @@
                         <td>
                             <input onchange="actualizarCarrito(<?php echo $id_producto; ?>, this.value);" type="number" value="<?php echo $cantidad; ?>" min="1">
                         </td>
-                        <td id="subtotal">$<?php echo number_format($subtotal, 2); ?></td>
+                        <td id="subtotal" onchange="consultar_subtotal(<?php echo $productos_pedidos; ?>);">$</td>
                         <td><button class="btn btn-eli">Eliminar</button></td>
                     </tr>
                 <?php } ?>
@@ -122,8 +150,8 @@
 
         <div class="actions">
             <a href="index.php" class="btn btn-re">&larr; Continuar Comprando</a>
-            <div id="total">
-                Total: $<span id="total"><?php echo number_format($total, 2); ?></span>
+            <div id="total" onbl>$<?php echo number_format($total, 2); ?></div>
+
             </div>
             <a href="carrito2.php" class="btn btn-com">Continuar &rarr;</a>
         </div>

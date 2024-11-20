@@ -35,11 +35,13 @@
     </nav>
     <main>
         <div id="contenedor">
-            <form action="" method="get">
+            <form action="funciones/enviarcorreo.php" method="get">
                 <label for="nombre">Nombre:</label>
                 <input type="text" name="nombre" id="nombre"><br>
                 <label for="correo">Correo</label>
-                <input type="text" name="correo" id="correo">
+                <input type="email" name="correo" id="correo">
+                <label for="Asunto">Asunto:</label>
+                <input type="text" name="asunto" id="asunto"><br>
                 <button type="submit">Enviar</button>
             </form>
         </div>
