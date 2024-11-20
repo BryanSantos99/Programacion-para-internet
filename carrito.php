@@ -24,7 +24,7 @@
     <script src="js/jquery-3.7.1.min.js"></script>
     <title>Carrito</title>
     <script>
-        function actualizarCarrito(id_producto, cantidad){
+        function actualizarCarrito(id_producto, cantidad,pedido){
 
             $.ajax({
                 url: 'funciones/carritoAjaxUpdate.php',
@@ -33,8 +33,8 @@
                 data: { id_producto: id_producto, cantidad: cantidad },
                 success: function(res) {
                     console.log(res);
-                    
-                    
+                    consultar_subtotal(res,id_producto);
+                    consultar_total(pedido);
                 },
                 error: function() {
                     console.log("error");
@@ -45,6 +45,37 @@
                 }
             });
         }
+        function consultar_subtotal(c,id){
+            
+            $.ajax({
+            url: 'funciones/updatesubtotal.php',
+            data:{cantidad:c,id:id},
+            type: 'POST',
+            dataType: 'text',
+            success: function(data) {
+                console.log(data);
+            document.getElementById("subtotal").innerHTML ='$'+data;
+            
+            }
+
+            });
+
+        }
+        function consultar_total(pedido){
+            $.ajax({
+            url: 'funciones/updatTotal.php',
+            data:{pedido:pedido},
+            type: 'POST',
+            dataType: 'text',
+            success: function(data) {
+            document.getElementById("total").innerHTML = data;
+            }
+
+            });
+
+        }
+
+
     </script>
 </head>
 <body>
@@ -111,9 +142,9 @@
                         <td><?php echo $nombre; ?></td>
                         <td>$<?php echo number_format($costo, 2); ?></td>
                         <td>
-                            <input onchange="actualizarCarrito(<?php echo $id_producto; ?>, this.value);" type="number" value="<?php echo $cantidad; ?>" min="1">
+                            <input onchange="actualizarCarrito(<?php echo $id_producto; ?>, this.value,<?php echo $id_pedido; ?>);" type="number" value="<?php echo $cantidad; ?>" min="1">
                         </td>
-                        <td id="subtotal">$<?php echo number_format($subtotal, 2); ?></td>
+                        <td id="subtotal">$<?php echo $subtotal; ?></td>
                         <td><button class="btn btn-eli">Eliminar</button></td>
                     </tr>
                 <?php } ?>
@@ -122,11 +153,10 @@
 
         <div class="actions">
             <a href="index.php" class="btn btn-re">&larr; Continuar Comprando</a>
-            <div id="total">
-                Total: $<span id="total"><?php echo number_format($total, 2); ?></span>
-            </div>
+            <div class="total">Total: <span id="total">$<?php echo $total; ?></span></div>
+            
             <a href="carrito2.php" class="btn btn-com">Continuar &rarr;</a>
-        </div>
+        
     </div>
 </main>
 

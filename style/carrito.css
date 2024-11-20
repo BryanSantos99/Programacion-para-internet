@@ -103,13 +103,14 @@ input[type="number"] {
 
 .actions {
     display: flex;
+    align-items: center; /* Centra horizontalmente */
     justify-content: space-between;
-    align-items: center;
 }
 
 .total {
-    font-size: 18px;
-    font-weight: bold;
+    margin: 10px 0;
+    color: #333;
+    font-size: 24px;
 }
 
 /* Responsividad */
