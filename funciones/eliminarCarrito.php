@@ -10,7 +10,7 @@
 
 
     
-        $sql = "UPDATE empleados SET eliminado = 1 WHERE id = '$id'";
+    $sql = "DELETE FROM pedidos_productos WHERE id_producto = $id";
         $res = $con->query($sql);
 
         if ($res) {

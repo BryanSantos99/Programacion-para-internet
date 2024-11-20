@@ -90,10 +90,10 @@
         <div id="produ">
             <div id="productos">
             <?php
-            for ($i = 1; $i <= 6; $i++){
-                $sql = "SELECT * FROM productos LIMIT 6";
+           
+                $sql = "SELECT * FROM productos ORDER BY RAND() LIMIT 6";
                 $res = $con->query($sql);
-                $row = $res->fetch_assoc();
+                while($row = $res->fetch_assoc()){
                     $id_producto = $row['id'];
                     $img = $row['archivo_n'];
                     $name = $row['nombre'];
