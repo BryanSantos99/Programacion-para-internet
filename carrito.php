@@ -54,8 +54,11 @@
             dataType: 'text',
             success: function(data) {
                 console.log(data);
-            document.getElementById("subtotal").innerHTML ='$'+data;
+            document.getElementById("subtotal-"+id).innerHTML ='$'+data;
             
+            }, error: function(data){
+                data=0
+                document.getElementById("subtotal-"+id).innerHTML ='$'+data;
             }
 
             });
@@ -69,13 +72,35 @@
             dataType: 'text',
             success: function(data) {
             document.getElementById("total").innerHTML = data;
+            },error: function(data){
+                data=0
+                document.getElementById("total").innerHTML ='$'+data;
             }
 
             });
 
         }
-
-
+        function eliminarProducto(id) {
+            if (confirm("¿Desea eliminar el Producto con id " + id + "?")) {
+                $.ajax({
+                    url: 'funciones/eliminarCarrito.php',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function(response) {
+                    if (response) {
+                        alert("Producto eliminado correctamente.");
+                        $("#producto-"+id).hide();
+                    } else {
+                        alert("No se pudo eliminar al producto.");
+                    }
+                },
+                error: function() {
+                    alert("Hubo un error al intentar eliminar al producto.");
+                    console.log(error);
+                }
+                });
+            }
+        }
     </script>
 </head>
 <body>
@@ -138,14 +163,14 @@
                     $subtotal = $costo * $cantidad;
                     $total += $subtotal;
                 ?>
-                    <tr>
+                    <tr  id="producto-<?php echo $id_producto; ?>">
                         <td><?php echo $nombre; ?></td>
                         <td>$<?php echo number_format($costo, 2); ?></td>
                         <td>
                             <input onchange="actualizarCarrito(<?php echo $id_producto; ?>, this.value,<?php echo $id_pedido; ?>);" type="number" value="<?php echo $cantidad; ?>" min="1">
                         </td>
-                        <td id="subtotal">$<?php echo $subtotal; ?></td>
-                        <td><button class="btn btn-eli">Eliminar</button></td>
+                        <td id="subtotal-<?php echo $id_producto; ?>">$<?php echo $subtotal; ?></td>
+                        <td><button class="btn btn-eli" onclick="eliminarProducto(<?php echo $id_producto; ?>),actualizarCarrito(<?php echo $id_producto; ?>, this.value,<?php echo $id_pedido; ?>)">Eliminar</button></td>
                     </tr>
                 <?php } ?>
             </tbody>

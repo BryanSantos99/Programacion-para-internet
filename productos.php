@@ -82,10 +82,10 @@
         <div id="produ">
         <div id="productos">
             <?php
-            for ($i = 1; $i <= 100; $i++){
-                $sql = "SELECT * FROM productos LIMIT 6";
-                $res = $con->query($sql);
-                $row = $res->fetch_assoc();
+    
+            $sql = "SELECT * FROM productos";
+            $res = $con->query($sql);
+            while($row = $res->fetch_assoc()){
                     $id = $row['id'];
                     $img = $row['archivo_n'];
                     $name = $row['nombre'];

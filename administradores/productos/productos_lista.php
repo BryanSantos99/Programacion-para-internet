@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Listado de empleados</title>
+    <title>Listado de productos</title>
     <link rel="stylesheet" href="style/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="style/menu.css">
@@ -107,6 +107,7 @@ button.boton-editar {
                         <th>Nombre</th>
                         <th>Codigo</th>
                         <th>Costo</th>
+                        <th>stock</th>
                         <th>Ver detalles</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
@@ -120,11 +121,13 @@ button.boton-editar {
                             $nombre = $row["nombre"];
                             $costo = $row["costo"];
                             $codigo = $row["codigo"];
-                            echo '<tr  id="empleado-'.$id.'">';
+                            $stock = $row["stock"];
+                            echo '<tr  id="producto-'.$id.'">';
                             echo "<td>$id</td>";
                             echo "<td>$nombre</td>";
                             echo "<td>$codigo</td>";
                             echo "<td>$costo</td>";
+                            echo "<td>$stock</td>";
                             echo '<td><button class="boton" onclick="verEmpleado(' . $id . ')">Ver Detalles</button></td>'; 
                             echo '<td><button class="boton boton-editar" onclick="editarEmpleado(' . $id . ')">Editar Registro</button></td>';
                             echo '<td><button class="boton boton-eliminar" onclick="eliminarEmpleado(' . $id . ')">Eliminar Registro</button></td>';

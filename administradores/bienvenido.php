@@ -20,7 +20,7 @@ if (!isset($_SESSION['correo'])) {
         <ul id="menu-lista">
        
             <li class="menu-item"><a href="empleados/empleados_lista.php">Empleados</a></li>
-            <li class="menu-item"><a href="#">Productos</a></li>
+            <li class="menu-item"><a href="productos/productos_lista.php">Productos</a></li>
             <li class="menu-item"><a href="#">Promociones</a></li>
             <li class="menu-item"><a href="#">Pedidos</a></li>
             <li class="menu-item"><a href="empleados/funciones/salir.php">Cerrar sesión</a></li>
