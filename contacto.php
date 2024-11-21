@@ -37,7 +37,7 @@
             <a href="productos.php">Productos</a>
             <a href="#">Contacto</a>
             <?php
-            echo '<a href="carrito.php">Carrito ('.$cantidad_productos .')</a>';
+            echo '<a href="carrito.php">Carrito</a>';
             ?>
             <?php
             if (!isset($_SESSION['correo'])) {

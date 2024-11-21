@@ -106,15 +106,22 @@
 <body>
     <?php
         
-        $sql = "SELECT * FROM pedidos WHERE estado = 0";
+        $sql = "SELECT * FROM pedidos WHERE id_cliente = '".$_SESSION['id_usuario']."' AND estado = 0";
         $res = $con->query($sql);
-        $pedido = $res->fetch_array();
-        $id_pedido=$pedido["id"];
+        if (!$res || $res->num_rows == 0) {
+            $id_pedido = null;
+            $cantidad_productos = 0;
+            $res2 = null;
+        } else {
+            $pedido = $res->fetch_array();
+            $id_pedido = $pedido["id"];
+            
+            $sql2 = "SELECT * FROM pedidos_productos WHERE id_pedido = '$id_pedido'";
+            $res2 = $con->query($sql2);
+           
+            $cantidad_productos = $res2->num_rows;
+        }
         
-        $sql2 = "SELECT * FROM pedidos_productos WHERE id_pedido = '$id_pedido'";
-        $res2 = $con->query($sql2);
-       
-        $cantidad_productos = $res2->num_rows;
 
     ?>
     <nav>
@@ -151,28 +158,31 @@
             <tbody>
                 <?php
                 $total = 0;
-                while ($productos_pedidos = $res2->fetch_array()) {
-                    $id_producto = $productos_pedidos["id_producto"];
-                    $sql3 = "SELECT * FROM productos WHERE id = $id_producto";
-                    $res3 = $con->query($sql3);
-                    $producto = $res3->fetch_array();
-                
-                    $nombre = htmlspecialchars($producto["nombre"], ENT_QUOTES, 'UTF-8');
-                    $cantidad = (int)$productos_pedidos["cantidad"];
-                    $costo = (float)$producto["costo"];
-                    $subtotal = $costo * $cantidad;
-                    $total += $subtotal;
-                ?>
-                    <tr  id="producto-<?php echo $id_producto; ?>">
-                        <td><?php echo $nombre; ?></td>
-                        <td>$<?php echo number_format($costo, 2); ?></td>
-                        <td>
-                            <input onchange="actualizarCarrito(<?php echo $id_producto; ?>, this.value,<?php echo $id_pedido; ?>);" type="number" value="<?php echo $cantidad; ?>" min="1">
-                        </td>
-                        <td id="subtotal-<?php echo $id_producto; ?>">$<?php echo $subtotal; ?></td>
-                        <td><button class="btn btn-eli" onclick="eliminarProducto(<?php echo $id_producto; ?>),actualizarCarrito(<?php echo $id_producto; ?>, this.value,<?php echo $id_pedido; ?>)">Eliminar</button></td>
-                    </tr>
+                if ($res2 != null) {
+                    while ($productos_pedidos = $res2->fetch_array()) {
+                        $id_producto = $productos_pedidos["id_producto"];
+                        $sql3 = "SELECT * FROM productos WHERE id = $id_producto";
+                        $res3 = $con->query($sql3);
+                        $producto = $res3->fetch_array();
+                    
+                        $nombre = htmlspecialchars($producto["nombre"], ENT_QUOTES, 'UTF-8');
+                        $cantidad = (int)$productos_pedidos["cantidad"];
+                        $costo = (float)$producto["costo"];
+                        $subtotal = $costo * $cantidad;
+                        $total += $subtotal;
+                    ?>
+                        <tr  id="producto-<?php echo $id_producto; ?>">
+                            <td><?php echo $nombre; ?></td>
+                            <td>$<?php echo number_format($costo, 2); ?></td>
+                            <td>
+                                <input onchange="actualizarCarrito(<?php echo $id_producto; ?>, this.value,<?php echo $id_pedido; ?>);" type="number" value="<?php echo $cantidad; ?>" min="1">
+                            </td>
+                            <td id="subtotal-<?php echo $id_producto; ?>">$<?php echo $subtotal; ?></td>
+                            <td><button class="btn btn-eli" onclick="eliminarProducto(<?php echo $id_producto; ?>),actualizarCarrito(<?php echo $id_producto; ?>, this.value,<?php echo $id_pedido; ?>)">Eliminar</button></td>
+                        </tr>
+                    <?php } ?>
                 <?php } ?>
+              
             </tbody>
         </table>
 
