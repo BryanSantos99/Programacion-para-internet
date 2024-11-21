@@ -62,7 +62,7 @@
             if (!isset($_SESSION['correo'])) {
                 echo '<a href="carrito.php">Carrito</a>';
             }else{
-                echo '<a href="carrito.php">Carrito ('.$cantidad_productos .')</a>';
+                echo '<a href="carrito.php">Carrito</a>';
             }
             ?>
             

@@ -62,7 +62,7 @@
             if (!isset($_SESSION['correo'])) {
                 echo '<a href="carrito.php">Carrito</a>';
             }else{
-                echo '<a href="carrito.php">Carrito ('.$cantidad_productos .')</a>';
+                echo '<a href="carrito.php">Carrito</a>';
             }
             ?>
             
@@ -83,7 +83,7 @@
         <div id="productos">
             <?php
     
-            $sql = "SELECT * FROM productos";
+            $sql = "SELECT * FROM productos WHERE eliminado = 0";
             $res = $con->query($sql);
             while($row = $res->fetch_assoc()){
                     $id = $row['id'];
