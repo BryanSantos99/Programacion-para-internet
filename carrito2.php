@@ -8,6 +8,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        function terminarPedido(id) {
+            window.location.href = 'empleados_ticket.php?id=' + id;
+        }
+    </script>
     <?php
         session_start();
         ini_set('display_errors', 1);

@@ -10,13 +10,8 @@
     $id_producto = intval($_REQUEST['id_producto']);
     $cantidad = intval($_REQUEST['cantidad']);
     
-    $sql5="UPDATE productos SET cantidad = $cantidad3 WHERE id_producto=$id_producto";
-    $res5 = $con->query($sql5);
-
     $sql5="UPDATE pedidos_productos SET cantidad = $cantidad WHERE id_producto=$id_producto";
     $res5 = $con->query($sql5);
-
-
     
     if (!$res5) {
         echo "Error en la actualización: " . $con->error;
