@@ -88,10 +88,7 @@
                     data: { id: id },
                     success: function(response) {
                     if (response) {
-                        alert("Producto eliminado correctamente.");
                         $("#producto-"+id).hide();
-                    } else {
-                        alert("No se pudo eliminar al producto.");
                     }
                 },
                 error: function() {
@@ -131,7 +128,7 @@
             <a href="productos.php">Productos</a>
             <a href="contacto.php">Contacto</a>
             <?php
-            echo '<a href="#">Carrito ('.$cantidad_productos .')</a>';
+            echo '<a href="#">Carrito</a>';
             ?>
             <?php
             if (!isset($_SESSION['correo'])) {
@@ -143,7 +140,13 @@
         </ul>
     </nav>
     <main>
+    <?php
+        $total = 0;
+        if ($res2 != null){
+        if  ($cantidad_productos >0){
+            ?>
     <div class="container">
+    
         <h1>Carrito de compras</h1>
         <table>
             <thead>
@@ -156,9 +159,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php
-                $total = 0;
-                if ($res2 != null) {
+            <?php
                     while ($productos_pedidos = $res2->fetch_array()) {
                         $id_producto = $productos_pedidos["id_producto"];
                         $sql3 = "SELECT * FROM productos WHERE id = $id_producto";
@@ -181,7 +182,7 @@
                             <td><button class="btn btn-eli" onclick="eliminarProducto(<?php echo $id_producto; ?>),actualizarCarrito(<?php echo $id_producto; ?>, this.value,<?php echo $id_pedido; ?>)">Eliminar</button></td>
                         </tr>
                     <?php } ?>
-                <?php } ?>
+                
               
             </tbody>
         </table>
@@ -193,6 +194,11 @@
             <a href="carrito2.php" class="btn btn-com">Continuar &rarr;</a>
         
     </div>
+    <?php }else{
+        echo "<h1>Carro vacío</h1>";
+    } }else {
+                    echo "<h1>Carro vacío</h1>";
+                } ?>
 </main>
 
     <footer>
