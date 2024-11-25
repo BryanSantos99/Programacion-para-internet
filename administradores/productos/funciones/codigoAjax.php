@@ -6,8 +6,8 @@
     require "conecta.php";
     $con=conecta();
 
-    $correo=$_REQUEST['correo'];
-    $sql = "SELECT * FROM empleados WHERE correo = '$correo'";
+    $codigo=$_REQUEST['codigo'];
+    $sql = "SELECT * FROM productos WHERE codigo = '$codigo'";
     $res=$con->query($sql);
     $ban=0;
 

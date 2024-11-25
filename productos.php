@@ -9,19 +9,7 @@
         $con = conecta();
         session_start();
     ?>
-    <?php
-        
-        $sql = "SELECT * FROM pedidos WHERE estado = 0";
-        $res = $con->query($sql);
-        $pedido = $res->fetch_array();
-        $id_pedido=$pedido["id"];
-        
-        $sql2 = "SELECT * FROM pedidos_productos WHERE id_pedido = '$id_pedido'";
-        $res2 = $con->query($sql2);
-        $pedido_producto = $res2->fetch_array();
-        $cantidad_productos = $res2->num_rows;
-
-    ?> 
+   
      <script>
         function agregarCarrito(id_producto){
             console.log(id_producto,"puto");
@@ -87,7 +75,7 @@
             $res = $con->query($sql);
             while($row = $res->fetch_assoc()){
                     $id = $row['id'];
-                    $img = $row['archivo_n'];
+                    $img = $row['archivo'];
                     $name = $row['nombre'];
                     $cod = $row['codigo'];
                     $pre = $row['costo'];

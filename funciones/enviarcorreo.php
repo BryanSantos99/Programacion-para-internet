@@ -1,35 +1,39 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-   
-    $nombre = htmlspecialchars($_POST['nombre']);
-    $email = htmlspecialchars($_POST['email']);
-    $mensaje = htmlspecialchars($_POST['mensaje']);
-    $asunto = htmlspecialchars($_POST['asunto']);
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-  
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "El formato del correo electrónico es inválido.";
-        exit;
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
+$mail = new PHPMailer(true);
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nombre = $_POST['nombre'];
+    $correo = $_POST['correo'];
+    $asunto = $_POST['asunto'];
+
+    try {
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'bryansantosgarcia41@gmail.com'; 
+        $mail->Password = 'ngud ezwg abhm vfnk'; 
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+
+        $mail->setFrom($correo, $nombre);
+        $mail->addAddress('bryansantosgarcia41@gmail.com','Bryan');
+        $mail->isHTML(true);
+        $mail->Subject = $asunto;
+        $mail->Body    = "Nombre: $nombre<br>Correo: $correo<br>";
+
+        $mail->send();
+        echo 'Mensaje enviado correctamente';
+    } catch (Exception $e) {
+        echo "Error al enviar el mensaje: {$mail->ErrorInfo}";
     }
-
-  
-    $destinatario = "bryansantosgarcia41@gmail.com";
-    $contenido = "Nuevo mensaje de contacto:\n\n";
-    $contenido .= "Nombre: $nombre\n";
-    $contenido .= "Correo: $email\n";
-    $contenido .= "Asunto: $asunto\n\n";
-    $contenido .= "Mensaje:\n$mensaje\n";
-
-    $headers = "From: $email\r\n";
-    $headers .= "Reply-To: $email\r\n";
-    $headers .= "X-Mailer: PHP/" . phpversion();
-
-   
-    if (mail($destinatario, $asunto, $contenido, $headers)) {
-        echo "Correo enviado con éxito.";
-    } else {
-        echo "Error al enviar el correo.";
-    }
-    header('Location: ../contacto.php');
 }
+header('Location: ../contacto.php');
 ?>

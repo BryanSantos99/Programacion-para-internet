@@ -7,15 +7,15 @@
     $con = conecta();
 
     $id = $_POST['id'];
-    $cantidad = $_POST['cantidad'];
 
-    $sql5="UPDATE productos SET stock = stock + '$cantidad' WHERE id=$id";
-    $res = $con->query($sql5);
-    $sql = "DELETE FROM pedidos_productos WHERE id_producto = $id";
-    $res = $con->query($sql);
+
+    
+        $sql = "UPDATE promociones SET eliminado = 1 WHERE id = '$id'";
+        $res = $con->query($sql);
 
         if ($res) {
-           echo 1;
+            
+            echo 1;
         } else {
             echo 0;
         }

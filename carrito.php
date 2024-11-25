@@ -25,7 +25,10 @@
     <title>Carrito</title>
     <script>
         function actualizarCarrito(id_producto, cantidad,pedido){
-
+            if (cantidad==0) {
+                eliminarProducto(id_producto,pedido);
+                consultar_total(pedido);
+            }else{
             $.ajax({
                 url: 'funciones/carritoAjaxUpdate.php',
                 type: 'post',
@@ -36,14 +39,15 @@
                     consultar_subtotal(res,id_producto);
                     consultar_total(pedido);
                 },
-                error: function() {
-                    console.log("error");
+                error: function(res) {
+                    console.log("error",res);
                     $('#mensaje').html('Error archivo no encontrado').show();
                     setTimeout(function() {
                         $('#mensaje').html('').hide();
                     }, 5000);
                 }
             });
+        }
         }
         function consultar_subtotal(c,id){
             
@@ -80,22 +84,32 @@
             });
 
         }
-        function eliminarProducto(id) {
+        function eliminarProducto(id,pedido) {
+    
+            var cantidad = $('#cantidad-'+id).val();
+
             if (confirm("¿Desea eliminar el Producto con id " + id + "?")) {
                 $.ajax({
                     url: 'funciones/eliminarCarrito.php',
                     type: 'POST',
-                    data: { id: id },
+                    data: { id: id ,cantidad:cantidad},
                     success: function(response) {
-                    if (response) {
-                        $("#producto-"+id).hide();
+                        if (response) {
+                            console.log(response);
+                            $("#producto-"+id).hide();
+                            consultar_total(pedido);
+                           
+                        }else{
+                            document.getElementById("subtotal-"+id).innerHTML ='$'+cantidad;
+                        }
+                    },
+                    error: function() {
+                        alert("Hubo un error al intentar eliminar al producto.");
+                        console.log(error);
                     }
-                },
-                error: function() {
-                    alert("Hubo un error al intentar eliminar al producto.");
-                    console.log(error);
-                }
                 });
+            } else {
+                return;
             }
         }
     </script>
@@ -176,10 +190,10 @@
                             <td><?php echo $nombre; ?></td>
                             <td>$<?php echo number_format($costo, 2); ?></td>
                             <td>
-                                <input onchange="actualizarCarrito(<?php echo $id_producto; ?>, this.value,<?php echo $id_pedido; ?>);" type="number" value="<?php echo $cantidad; ?>" min="1">
+                                <input id="cantidad-<?php echo $id_producto; ?>" onchange="actualizarCarrito(<?php echo $id_producto; ?>, this.value,<?php echo $id_pedido; ?>);" type="number" value="<?php echo $cantidad; ?>" min="1">
                             </td>
                             <td id="subtotal-<?php echo $id_producto; ?>">$<?php echo $subtotal; ?></td>
-                            <td><button class="btn btn-eli" onclick="eliminarProducto(<?php echo $id_producto; ?>),actualizarCarrito(<?php echo $id_producto; ?>, this.value,<?php echo $id_pedido; ?>)">Eliminar</button></td>
+                            <td><button class="btn btn-eli" onclick="eliminarProducto(<?php echo $id_producto; ?>,<?php echo $id_pedido; ?>)">Eliminar</button></td>
                         </tr>
                     <?php } ?>
                 
@@ -195,10 +209,10 @@
         
     </div>
     <?php }else{
-        echo "<h1>Carro vacío</h1>";
+        echo '<h1 class="vc">Carrito vacío</h1>';
     } }else {
-                    echo "<h1>Carro vacío</h1>";
-                } ?>
+            echo '<h1 class="vc">Carrito vacío</h1>';
+            } ?>
 </main>
 
     <footer>

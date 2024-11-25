@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -103,7 +102,7 @@ input[type="number"] {
 
 .actions {
     display: flex;
-    align-items: center; /* Centra horizontalmente */
+    align-items: center;
     justify-content: space-between;
 }
 
@@ -113,9 +112,14 @@ input[type="number"] {
     font-size: 24px;
 }
 
-/* Responsividad */
 @media (max-width: 768px) {
     th, td {
         font-size: 14px;
     }
+}
+
+.vc {
+    text-align: center;
+    font-size: 24px; 
+    margin: 20px 0; 
 }

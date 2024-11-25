@@ -35,6 +35,8 @@
 
         $sql4 = "INSERT INTO pedidos_productos (id_pedido, id_producto, cantidad, precio) VALUES ('$id_pedido', '$id_producto', '1', '$precio_producto')";
         $res4 = $con->query($sql4);
+        
+       
 
     } else {
         $pedido = $res->fetch_array();
@@ -52,12 +54,17 @@
 
             $sql4 = "INSERT INTO pedidos_productos (id_pedido, id_producto, cantidad, precio) VALUES ('$id_pedido', '$id_producto', '1', '$precio_producto')";
             $res4 = $con->query($sql4);
+            
+            $sql_stock = "UPDATE productos SET stock = stock - 1 WHERE id = '$id_producto'";
+            $con->query($sql_stock);
         }else{
             
             $sql5="UPDATE pedidos_productos SET cantidad = cantidad + 1 WHERE id_producto=$id_producto";
             $res5 = $con->query($sql5);
+            $sql_stock = "UPDATE productos SET stock = stock - 1 WHERE id = '$id_producto'";
+            $con->query($sql_stock);
             if (!$res5) {
-                echo "Error al actualizar la cantidad: " . $con->error; // Mensaje de error
+                echo "Error al actualizar la cantidad: " . $con->error; 
             }
         }
     }
