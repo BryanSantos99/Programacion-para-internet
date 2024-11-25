@@ -17,13 +17,6 @@
         var pasw = $('#pasw').val();
         var rol = $('#rol').val();
         
-        console.log("Validando campos...");
-        console.log("Nombre:", nombre);
-        console.log("Apellidos:", apellidos);
-        console.log("Correo:", correo);
-        console.log("Contraseña:", pasw);
-        console.log("Rol:", rol);
-
         $('#mensaje').show();
         if ((nombre === "" || apellidos === "" || correo === "" || pasw === "" || rol === "0" || archivo === "") && confirm === 1) {
             console.log("Faltan campos");

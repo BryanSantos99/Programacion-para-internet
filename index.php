@@ -65,7 +65,7 @@
     <main>
         <div id="promocion">
             <?php
-                $sql = "SELECT * FROM promociones";
+                $sql = "SELECT * FROM promociones ORDER BY RAND()";
                 $res = $con->query($sql);
                 if ($res && $res->num_rows > 0) {
                     $row = $res->fetch_assoc();
@@ -82,7 +82,7 @@
                 $res = $con->query($sql);
                 while($row = $res->fetch_assoc()){
                     $id_producto = $row['id'];
-                    $img = $row['archivo_n'];
+                    $img = $row['archivo'];
                     $name = $row['nombre'];
                     $cod = $row['codigo'];
                     $pre = $row['costo'];

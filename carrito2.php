@@ -9,8 +9,9 @@
 <html lang="en">
 <head>
     <script>
-        function terminarPedido(id) {
-            window.location.href = 'empleados_ticket.php?id=' + id;
+        function terminarPedido(id,total) {
+            window.location.href = 'funciones/terminarpedido.php?id=' + id + '&total=' + total;
+            
         }
     </script>
     <?php
@@ -33,7 +34,7 @@
 <body>
     <?php
         
-        $sql = "SELECT * FROM pedidos WHERE estado = 0";
+        $sql = "SELECT * FROM pedidos WHERE id_cliente = '".$_SESSION['id_usuario']."' AND estado = 0";
         $res = $con->query($sql);
         $pedido = $res->fetch_array();
         $id_pedido=$pedido["id"];
@@ -106,7 +107,7 @@
             <div class="total">
                 Total: $<?php echo number_format($total, 2);    mysqli_close($con); ?>
             </div>
-            <a href="#" class="btn btn-com">Terminar Pedido &rarr;</a>
+            <a href="#" class="btn btn-com" onclick="terminarPedido(<?php echo $id_pedido; ?>,<?php echo $total; ?>)">Terminar Pedido &rarr;</a>
         </div>
     </div>
 </main>

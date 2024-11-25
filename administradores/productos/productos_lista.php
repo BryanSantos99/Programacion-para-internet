@@ -80,8 +80,8 @@ button.boton-editar {
     <nav id="menu">
         <h1 id="titulo">Bienvenido, <?php echo $_SESSION['nombre_usuario']; ?>!</h1>
         <ul id="menu-lista">
-            <li class="menu-item"><a href="empleados_lista.php">Empleados</a></li>
-            <li class="menu-item"><a href="#">Productos</a></li>
+            <li class="menu-item"><a href="../empleados/empleados_lista.php">Empleados</a></li>
+            <li class="menu-item"><a href="productos_lista.php">Productos</a></li>
             <li class="menu-item"><a href="#">Promociones</a></li>
             <li class="menu-item"><a href="#">Pedidos</a></li>
             <li class="menu-item"><a href="funciones/salir.php">Cerrar sesión</a></li>
@@ -128,9 +128,9 @@ button.boton-editar {
                             echo "<td>$codigo</td>";
                             echo "<td>$costo</td>";
                             echo "<td>$stock</td>";
-                            echo '<td><button class="boton" onclick="verEmpleado(' . $id . ')">Ver Detalles</button></td>'; 
-                            echo '<td><button class="boton boton-editar" onclick="editarEmpleado(' . $id . ')">Editar Registro</button></td>';
-                            echo '<td><button class="boton boton-eliminar" onclick="eliminarEmpleado(' . $id . ')">Eliminar Registro</button></td>';
+                            echo '<td><button class="boton" onclick="verProducto(' . $id . ')">Ver Detalles</button></td>'; 
+                            echo '<td><button class="boton boton-editar" onclick="editarProducto(' . $id . ')">Editar Registro</button></td>';
+                            echo '<td><button class="boton boton-eliminar" onclick="eliminarProducto(' . $id . ')">Eliminar Registro</button></td>';
                             echo "</tr>";
                         }
                     ?>
@@ -138,7 +138,7 @@ button.boton-editar {
             </table>
             <div class="registro">
             <a href="productos_alta.php" class="botonCrear">Crear nuevo registro</a>
-            <a href="bienvenido.php" class="botonCrear">Volver al inicio</a>
+            <a href="../bienvenido.php" class="botonCrear">Volver al inicio</a>
         </div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Listado de empleados</title>
+    <title>Listado de productos</title>
     <link rel="stylesheet" href="style/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="style/menu.css">
@@ -39,32 +39,32 @@ button.boton-editar {
 }
     </style>
     <script>
-        function eliminarEmpleado(idEmpleado) {
-            if (confirm("¿Desea eliminar el producto con id " + idEmpleado + "?")) {
+        function eliminarProducto(idProducto) {
+            if (confirm("¿Desea eliminar la promocion con id " + idProducto + "?")) {
                 $.ajax({
-                    url: 'funciones/productos_elimina.php',
+                    url: 'funciones/promociones_elimina.php',
                     type: 'POST',
-                    data: { id: idEmpleado },
+                    data: { id: idProducto },
                     success: function(response) {
                     if (response == 1) {
-                        alert("Prodcuto eliminado correctamente.");
-                        $("#empleado-" + idEmpleado).hide();
+                        alert("Promocion eliminado correctamente.");
+                        $("#producto-" + idProducto).hide();
                     } else {
-                        alert("No se pudo eliminar el producto.");
+                        alert("No se pudo eliminar la promocion.");
                     }
                 },
                 error: function() {
-                    alert("Hubo un error al intentar eliminar al empleado.");
+                    alert("Hubo un error al intentar eliminar la promocion.");
                     console.log(error);
                 }
                 });
             }
         }
-        function editarEmpleado(idEmpleado) {
-            window.location.href = 'empleados_edita.php?id=' + idEmpleado;
+        function editarProducto(idProducto) {
+            window.location.href = 'promociones_edita.php?id=' + idProducto;
         }
-        function verEmpleado(idEmpleado) {
-            window.location.href = 'empleados_detalles.php?id=' + idEmpleado;
+        function verProducto(idProducto) {
+            window.location.href = 'promociones_detalles.php?id=' + idProducto;
         }
     </script>
 </head>
@@ -80,7 +80,7 @@ button.boton-editar {
     <nav id="menu">
         <h1 id="titulo">Bienvenido, <?php echo $_SESSION['nombre_usuario']; ?>!</h1>
         <ul id="menu-lista">
-            <li class="menu-item"><a href="empleados_lista.php">Empleados</a></li>
+            <li class="menu-item"><a href="../empleados/empleados_lista.php">Empleados</a></li>
             <li class="menu-item"><a href="../productos/productos_lista.php">Productos</a></li>
             <li class="menu-item"><a href="#">Promociones</a></li>
             <li class="menu-item"><a href="#">Pedidos</a></li>
@@ -93,21 +93,19 @@ button.boton-editar {
     
             require "funciones/conecta.php";
             $con = conecta();
-            $sql = "SELECT * FROM empleados WHERE eliminado = 0";
+            $sql = "SELECT * FROM promociones WHERE eliminado = 0";
             $res = $con->query($sql);
-            $cantidad_empleados = $res->num_rows;
+            $cantidad_productos = $res->num_rows;
         ?>
-        <h1>Listado de empleados (<?php echo $cantidad_empleados; ?>)</h1>
+        <h1>Listado de Promociones (<?php echo $cantidad_productos; ?>)</h1>
         
         <div class="tabla">
             <table>
                 <div id="registros">
                     <tr>
                         <th>ID</th>
-                        <th>Nombre completo</th>
-                        <th>Correo</th>
-                        <th>Rol</th>
-                        <th>Ver detalle</th>
+                        <th>Nombre</th>
+                        <th>Ver detalles</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
@@ -118,24 +116,19 @@ button.boton-editar {
                         while ($row = $res->fetch_array()) {
                             $id = $row["id"];
                             $nombre = $row["nombre"];
-                            $apellidos = $row["apellidos"];
-                            $correo = $row["correo"];
-                            $rol = $row["rol"] == 1 ? "Gerente" : "Ejecutivo";  
-                            echo '<tr  id="empleado-'.$id.'">';
+                            echo '<tr  id="producto-'.$id.'">';
                             echo "<td>$id</td>";
-                            echo "<td>$nombre $apellidos</td>";
-                            echo "<td>$correo</td>";
-                            echo "<td>$rol</td>";
-                            echo '<td><button class="boton" onclick="verEmpleado(' . $id . ')">Ver Detalles</button></td>'; 
-                            echo '<td><button class="boton boton-editar" onclick="editarEmpleado(' . $id . ')">Editar Registro</button></td>';
-                            echo '<td><button class="boton boton-eliminar" onclick="eliminarEmpleado(' . $id . ')">Eliminar Registro</button></td>';
+                            echo "<td>$nombre</td>";
+                            echo '<td><button class="boton" onclick="verProducto(' . $id . ')">Ver Detalles</button></td>'; 
+                            echo '<td><button class="boton boton-editar" onclick="editarProducto(' . $id . ')">Editar Registro</button></td>';
+                            echo '<td><button class="boton boton-eliminar" onclick="eliminarProducto(' . $id . ')">Eliminar Registro</button></td>';
                             echo "</tr>";
                         }
                     ?>
                 </div>
             </table>
             <div class="registro">
-            <a href="empleados_alta.php" class="botonCrear">Crear nuevo registro</a>
+            <a href="promociones_alta.php" class="botonCrear">Crear nuevo registro</a>
             <a href="../bienvenido.php" class="botonCrear">Volver al inicio</a>
         </div>
         </div>
