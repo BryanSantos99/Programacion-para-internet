@@ -168,7 +168,7 @@
                     <th>Producto</th>
                     <th>Precio</th>
                     <th>Cantidad</th>
-                    <th>Sub total</th>
+                   <th>Sub total</th>
                     <th></th>
                 </tr>
             </thead>

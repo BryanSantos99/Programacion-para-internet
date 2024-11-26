@@ -125,7 +125,7 @@
                 <div id="mensajeCorreo"></div>
 
                 <label for="pasw">Contraseña:</label><br>
-                <input type="password" id="pasw" name="pasw" class="campos" placeholder="Ingresa la contraseña" value="<?php echo $pasw; ?>"><br>
+                <input type="password" id="pasw" name="pasw" class="campos" placeholder="Ingresa la contraseña"><br>
 
                 <label for="archivo">Archivo actual:</label><br>
             

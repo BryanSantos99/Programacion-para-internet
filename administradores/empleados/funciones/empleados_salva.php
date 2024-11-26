@@ -23,7 +23,7 @@
     $len = count($arreglo);
     $pos = $len-1;
     $ext = $arreglo[$pos];
-    $dir = "C:\xampp\htdocs\proyecto\administradores\fotos";
+    $dir = "/Applications/XAMPP/xamppfiles/htdocs/Programacion-para-internet/productosf";
 
     
     if (!is_writable($dir)) {
