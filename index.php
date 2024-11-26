@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     <?php
+        if (isset($_SESSION['correo']) && isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] === 'c') {
+            session_destroy(); 
+        }
         session_start();
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
@@ -65,7 +68,7 @@
     <main>
         <div id="promocion">
             <?php
-                $sql = "SELECT * FROM promociones ORDER BY RAND()";
+                $sql = "SELECT * FROM promociones WHERE eliminado='0' ORDER BY RAND() ";
                 $res = $con->query($sql);
                 if ($res && $res->num_rows > 0) {
                     $row = $res->fetch_assoc();
@@ -87,8 +90,8 @@
                     $cod = $row['codigo'];
                     $pre = $row['costo'];
                     echo '<div class="producto" id="producto-'.$id_producto.'"><br>';
-                    echo '<a class ="imgproducto" href="https://www.google.com/"><img id="imgp'.$id_producto.'" src="productosf/'.$img.'"></a><br>';
-                    echo '<a href="#">'.$name.'</a><br>';
+                    echo '<a class ="imgproducto" href="producto_detalle.php?id='.$id_producto.'"><img id="imgp'.$id_producto.'" src="productosf/'.$img.'"></a><br>';
+                    echo '<a href="producto_detalle.php?id='.$id_producto.'">'.$name.'</a><br>';
                     echo '<p>Codigo: '.$cod.'</p>';
                     echo '<p>$'.$pre.'</p>';
                     if (isset($_SESSION['correo'])) {
