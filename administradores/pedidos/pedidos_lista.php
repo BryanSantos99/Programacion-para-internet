@@ -38,33 +38,9 @@ button.boton-editar {
   background-color: #2196F3; 
 }
     </style>
-    <script>
-        function eliminarProducto(idProducto) {
-            if (confirm("¿Desea eliminar la promocion con id " + idProducto + "?")) {
-                $.ajax({
-                    url: 'funciones/promociones_elimina.php',
-                    type: 'POST',
-                    data: { id: idProducto },
-                    success: function(response) {
-                    if (response == 1) {
-                        alert("Promocion eliminado correctamente.");
-                        $("#producto-" + idProducto).hide();
-                    } else {
-                        alert("No se pudo eliminar la promocion.");
-                    }
-                },
-                error: function() {
-                    alert("Hubo un error al intentar eliminar la promocion.");
-                    console.log(error);
-                }
-                });
-            }
-        }
-        function editarProducto(idProducto) {
-            window.location.href = 'promociones_edita.php?id=' + idProducto;
-        }
-        function verProducto(idProducto) {
-            window.location.href = 'promociones_detalles.php?id=' + idProducto;
+    <script>   
+        function verPedido(idProducto) {
+            window.location.href = 'pedidos_detalles.php?id=' + idProducto;
         }
     </script>
 </head>
@@ -82,8 +58,8 @@ button.boton-editar {
         <ul id="menu-lista">
             <li class="menu-item"><a href="../empleados/empleados_lista.php">Empleados</a></li>
             <li class="menu-item"><a href="../productos/productos_lista.php">Productos</a></li>
-            <li class="menu-item"><a href="promociones_lista.php">Promociones</a></li>
-            <li class="menu-item"><a href="../pedidos/pedidos_lista.php">Pedidos</a></li>
+            <li class="menu-item"><a href="../promociones/promociones_lista.php">Promociones</a></li>
+            <li class="menu-item"><a href="pedidos_lista.php">Pedidos</a></li>
             <li class="menu-item"><a href="../funciones/salir.php">Cerrar sesión</a></li>
         </ul>
     </nav>
@@ -93,21 +69,21 @@ button.boton-editar {
     
             require "funciones/conecta.php";
             $con = conecta();
-            $sql = "SELECT * FROM promociones WHERE eliminado = 0";
+            $sql = "SELECT * FROM pedidos WHERE estado = 1";
             $res = $con->query($sql);
             $cantidad_productos = $res->num_rows;
         ?>
-        <h1>Listado de Promociones (<?php echo $cantidad_productos; ?>)</h1>
+        <h1>Listado de Pedidos (<?php echo $cantidad_productos; ?>)</h1>
         
         <div class="tabla">
             <table>
                 <div id="registros">
                     <tr>
                         <th>ID</th>
-                        <th>Nombre</th>
+                        <th>Fecha</th>
+                        <th>Id Cliente</th>
+                        <th>Estado</th>
                         <th>Ver detalles</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
                     </tr>
                 </div>
                 <div id="tuplas">
@@ -115,20 +91,24 @@ button.boton-editar {
                         
                         while ($row = $res->fetch_array()) {
                             $id = $row["id"];
-                            $nombre = $row["nombre"];
+                            $fecha = $row["fecha"];
+                            $id_cliente = $row["id_cliente"];
+                            $estado = $row["estado"];
+                            if($estado==1){
+                                $estado="Cerrado";
+                            }
                             echo '<tr  id="producto-'.$id.'">';
                             echo "<td>$id</td>";
-                            echo "<td>$nombre</td>";
-                            echo '<td><button class="boton" onclick="verProducto(' . $id . ')">Ver Detalles</button></td>'; 
-                            echo '<td><button class="boton boton-editar" onclick="editarProducto(' . $id . ')">Editar Registro</button></td>';
-                            echo '<td><button class="boton boton-eliminar" onclick="eliminarProducto(' . $id . ')">Eliminar Registro</button></td>';
+                            echo "<td>$fecha</td>";
+                            echo "<td>$id_cliente</td>"; 
+                            echo "<td>$estado</td>";
+                            echo '<td><button class="boton boton-eliminar" onclick="verPedido(' . $id . ')">Ver detalles</button></td>';
                             echo "</tr>";
                         }
                     ?>
                 </div>
             </table>
             <div class="registro">
-            <a href="promociones_alta.php" class="botonCrear">Crear nuevo registro</a>
             <a href="../bienvenido.php" class="botonCrear">Volver al inicio</a>
         </div>
         </div>

@@ -3,7 +3,8 @@
   <head>
     <?php
     session_start();
-    if (isset($_SESSION['correo'])) {
+    if (isset($_SESSION['correo']) && isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] === 'e') {
+      
         header('Location:bienvenido.php');
         exit();
     }
@@ -22,7 +23,7 @@
           $('#mensaje').html('Faltan campos por llenar').show();
                 setTimeout(function() {
                   $('#mensaje').html('').hide();
-                }, 5000);;
+                }, 5000);
         } else {
           $.ajax({
             url: 'empleados/funciones/validaEmpleado.php',

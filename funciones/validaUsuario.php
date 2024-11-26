@@ -23,6 +23,7 @@ if ($num > 0) {
     $_SESSION['correo'] = $usuario['correo'];
     $_SESSION['nombre_usuario'] = $usuario['nombre'];
     $_SESSION['id_usuario']=$usuario['id'];
+    $_SESSION['tipo_usuario']='c';
 
     $ban = 1;
     echo "$ban";

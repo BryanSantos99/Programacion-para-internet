@@ -31,13 +31,13 @@
             <li class="menu-item"><a href="../empleados/empleados_lista.php">Empleados</a></li>
             <li class="menu-item"><a href="../productos/productos_lista.php">Productos</a></li>
             <li class="menu-item"><a href="promociones_lista.php">Promociones</a></li>
-            <li class="menu-item"><a href="#">Pedidos</a></li>
-            <li class="menu-item"><a href="funciones/salir.php">Cerrar sesión</a></li>
+            <li class="menu-item"><a href="../pedidos/pedidos_lista.php">Pedidos</a></li>
+            <li class="menu-item"><a href="../funciones/salir.php">Cerrar sesión</a></li>
         </ul>
     </nav>
     
     <div class="contenedor">
-        <h1>Detalles del Producto</h1>
+        <h1>Detalles de la Promoción</h1>
         <div class="detalles">
             <p class="registros"><strong>Nombre:</strong> <?php echo $nombre; ?></p>
             <p class="registros"><strong>Foto:</strong> <img src="../../promocionesf/<?php echo $archivo_n; ?>" alt="Foto del producto"></p>

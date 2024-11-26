@@ -22,7 +22,7 @@ if (!isset($_SESSION['correo'])) {
             <li class="menu-item"><a href="empleados/empleados_lista.php">Empleados</a></li>
             <li class="menu-item"><a href="productos/productos_lista.php">Productos</a></li>
             <li class="menu-item"><a href="promociones/promociones_lista.php">Promociones</a></li>
-            <li class="menu-item"><a href="#">Pedidos</a></li>
+            <li class="menu-item"><a href="pedidos/pedidos_lista.php">Pedidos</a></li>
             <li class="menu-item"><a href="empleados/funciones/salir.php">Cerrar sesión</a></li>
         </ul>
     </nav>

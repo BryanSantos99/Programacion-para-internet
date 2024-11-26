@@ -72,11 +72,11 @@
         <h1 id="titulo">Bienvenido, <?php echo $_SESSION['nombre_usuario']; ?>!</h1>
             <ul id="menu-lista">
            
-                <li class="menu-item"><a href="empleados_lista.php">Empleados</a></li>
-                <li class="menu-item"><a href="#">Productos</a></li>
-                <li class="menu-item"><a href="#">Promociones</a></li>
-                <li class="menu-item"><a href="#">Pedidos</a></li>
-                <li class="menu-item"><a href="funciones/salir.php">Cerrar sesión</a></li>
+            <li class="menu-item"><a href="../empleados/empleados_lista.php">Empleados</a></li>
+            <li class="menu-item"><a href="productos_lista.php">Productos</a></li>
+            <li class="menu-item"><a href="../promociones/promociones_lista.php">Promociones</a></li>
+            <li class="menu-item"><a href="../pedidos/pedidos_lista.php">Pedidos</a></li>
+            <li class="menu-item"><a href="../funciones/salir.php">Cerrar sesión</a></li>
             </ul>
         </nav>
     <div id="contenedorPrincipal">

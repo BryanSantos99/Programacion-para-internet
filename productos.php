@@ -80,8 +80,8 @@
                     $cod = $row['codigo'];
                     $pre = $row['costo'];
                     echo '<div class="producto" id="producto-'.$id.'"><br>';
-                    echo '<a class ="imgproducto" href="google.com"><img id="imgp'.$id.'" src="productosf/'.$img.'"></a><br>';
-                    echo '<a href="#">'.$name.'</a><br>';
+                    echo '<a class ="imgproducto" href="producto_detalle.php?id='.$id.'"><img id="imgp'.$id.'" src="productosf/'.$img.'"></a><br>';
+                    echo '<a href="producto_detalle.php?id='.$id.'">'.$name.'</a><br>';
                     echo '<p>Codigo: '.$cod.'</p>';
                     echo '<p>$'.$pre.'</p>';
                     if (isset($_SESSION['correo'])) {
